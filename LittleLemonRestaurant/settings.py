@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "LittleLemonAPI",
     "authenticationAPI",
     "rest_framework",
+    "rest_framework.authtoken"
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'authenticationAPI.authentication.CustomTokenAuthentication',
+    ],
+}
+
+AUTH_COOKIE = 'token'
+AUTH_COOKIE_MAX_AGE = 120
+AUTH_COOKIE_HTTP_ONLY = True
