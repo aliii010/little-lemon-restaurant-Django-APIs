@@ -138,8 +138,17 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'authenticationAPI.authentication.CustomTokenAuthentication',
     ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '10/minute',
+        'user': '10/minute',
+    },
 }
 
 AUTH_COOKIE = 'token'
-AUTH_COOKIE_MAX_AGE = 120
+AUTH_COOKIE_MAX_AGE = 300
 AUTH_COOKIE_HTTP_ONLY = True

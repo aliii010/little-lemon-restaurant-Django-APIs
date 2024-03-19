@@ -22,7 +22,7 @@ class MenuItem(models.Model):
   description = models.TextField()
   portion_size = models.CharField(max_length=50, choices=PORTION_SIZES, blank=True)
   rating = models.FloatField(blank=True)
-  image = models.ImageField(upload_to='menu-item-images/', blank=True)
+  image = models.ImageField(upload_to='menu-item-images/', blank=True, null=True)
   featured = models.BooleanField(default=False)
 
   def __str__(self):
@@ -33,6 +33,20 @@ class Reservations(models.Model):
   customer = models.ForeignKey(User, on_delete=models.PROTECT)
   num_of_guests = models.SmallIntegerField()
   reservation_date = models.DateField()
+
+
+class Cart(models.Model):
+  customer = models.ForeignKey(User, on_delete=models.PROTECT)
+  menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+  quantity = models.SmallIntegerField()
+
+  def get_price(self):
+    return self.menuitem.price * self.quantity
+
+  def __str__(self):
+    return f"{self.customer.username}'s Cart item"
+  class Meta:
+    unique_together = ('menuitem', 'customer')
 
 
 class Order(models.Model):
@@ -55,3 +69,6 @@ class OrderItem(models.Model):
 
   def get_price(self):
     return self.menuitem.price * self.quantity
+  
+  class Meta:
+    unique_together = ('order', 'menuitem')
