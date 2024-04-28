@@ -7,12 +7,13 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.throttling import UserRateThrottle
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
-from . models import MenuItem, Cart, Order, OrderItem
+from . models import MenuItem, Cart, Order, OrderItem,  Reservations
 from . serializers import (
   MenuItemSerializer, 
   UserSerializer, 
   CartSerializer, 
-  OrderSerializer
+  OrderSerializer,
+  ReservationSerializer,
 )
 from . custom_permissions import IsManager
 
@@ -146,7 +147,22 @@ class SingleOrderView(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
       else:
         return Response({"msg": "status is required, 0 or 1."}, status=status.HTTP_400_BAD_REQUEST)
+      
 
+class ReservationView(APIView):
+  def get(self, request):
+    reservations = Reservations.objects.all()
+    serializer = ReservationSerializer(reservations, many=True)
+    return Response(serializer.data)
+  
+  def post(self, request):
+    customer = request.user
+    Reservations.objects.create(
+      customer=customer,
+      num_of_guests=request.data.get("num_of_guests"),
+      reservation_date=request.data.get("reservation_date")
+    )
+    return Response({"msg": "Reservation Created Successfully"}, status=status.HTTP_201_CREATED)
 
 #user group management views
 class BaseGroupManagement(APIView):

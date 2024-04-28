@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MenuItem, Cart, OrderItem, Order, Category
+from .models import MenuItem, Cart, OrderItem, Order, Category, Reservations
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -48,3 +48,10 @@ class OrderSerializer(serializers.ModelSerializer):
   class Meta:
     model = Order
     fields = "__all__"
+
+
+class ReservationSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Reservations
+    exclude = ["customer"]
+
