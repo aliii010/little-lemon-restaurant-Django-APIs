@@ -12,7 +12,7 @@ The next section will walk you through the required endpoints with an authorizat
 
 #### Structure
 
-You will create one single Django app called `LittleLemonAPI` and implement all API endpoints in it. Use `pipenv` to manage the dependencies in the virtual environment.
+You will create one single Django app called `LittleLemonAPI` and implement all API endpoints in it. Use `venv` to manage the dependencies in the virtual environment.
 
 #### Function or class-based views
 
@@ -107,3 +107,7 @@ Implement proper filtering, pagination and sorting capabilities for `/api/menu-i
 #### Throttling
 
 Finally, apply some throttling for the authenticated users and anonymous or unauthenticated users.
+
+## ER Diagram
+
+<img src="ER.png" alt="ER diagram">
