@@ -1,5 +1,8 @@
 # Project structure and API routes
 
+> 📌 **Note:** This reading belongs to [Meta Back-End Learning Program / APIs course / Project structure and API routes
+> ](https://www.coursera.org/learn/apis/supplement/Ig5me/project-structure-and-api-routes)
+
 #### Introduction
 
 This reading is an overview of the scope of the project, all the necessary endpoints, and notes that you will have to implement in the final project. This reading will help you to successfully complete the project so read it carefully and reference it while developing your API project to help you keep on track.
